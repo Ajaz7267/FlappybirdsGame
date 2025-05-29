@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found - Flappy Bird</title>
+    <style>
+        body {
+            background: linear-gradient(180deg, #4EC0CA 60%, #3AA7B1 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+        }
+        .error-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        .error-msg {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .bird-anim {
+            position: relative;
+            width: 360px;
+            height: 200px;
+            margin: 0 auto 2rem auto;
+            background: none;
+        }
+        .bird {
+            position: absolute;
+            left: 60px;
+            top: 80px;
+            width: 48px;
+            height: 34px;
+            z-index: 2;
+            animation: flap 1s infinite linear, fly 3s infinite linear;
+        }
+        @keyframes flap {
+            0%, 100% { transform: translateY(0) rotate(-8deg); }
+            20% { transform: translateY(-10px) rotate(-12deg); }
+            40% { transform: translateY(0) rotate(-8deg); }
+            60% { transform: translateY(10px) rotate(8deg); }
+            80% { transform: translateY(0) rotate(-8deg); }
+        }
+        @keyframes fly {
+            0% { left: 60px; }
+            50% { left: 220px; }
+            100% { left: 60px; }
+        }
+        .pipe {
+            position: absolute;
+            width: 52px;
+            background: #2D3436;
+            border: 3px solid #1a2326;
+            border-radius: 8px;
+        }
+        .pipe-top {
+            height: 70px;
+            left: 180px;
+            top: 0;
+        }
+        .pipe-bottom {
+            height: 90px;
+            left: 180px;
+            bottom: 0;
+        }
+        .home-btn {
+            background: #fff;
+            color: #4EC0CA;
+            border: none;
+            padding: 14px 36px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+            transition: background 0.2s, color 0.2s;
+        }
+        .home-btn:hover {
+            background: #4EC0CA;
+            color: #fff;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100vw;
+            text-align: center;
+            color: #fff;
+            font-size: 1rem;
+            padding: 1rem 0;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bird-anim">
+            <img src="flappybird.png" alt="Flappy Bird" class="bird">
+            <div class="pipe pipe-top"></div>
+            <div class="pipe pipe-bottom"></div>
+        </div>
+        <div class="error-title">404</div>
+        <div class="error-msg">Oops! The page you're looking for can't be found.<br>
+            Maybe the bird hit a pipe...</div>
+        <button class="home-btn" onclick="window.location.href='index.html'">Go Home</button>
+    </div>
+    <div class="footer">&copy; 2025 Flappy Bird. All rights reserved.</div>
+</body>
+</html> 
