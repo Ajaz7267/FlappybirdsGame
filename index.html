@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Flappy Bird</title>
+        <link rel="stylesheet" href="flappybird.css">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3494326893444566"
+     crossorigin="anonymous"></script>
+        <script src="flappybird.js" defer></script>
+        <script src="leaderboard.js" defer></script>
+        <style>
+            html, body {
+                overflow-x: hidden;
+                max-width: 100%;
+            }
+            
+            .game-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: calc(100vh - 120px); /* Account for header and footer */
+                padding: 1rem;
+            }
+
+            .game-container {
+                position: relative;
+                width: 360px;
+                height: 640px;
+                border: 2px solid #2D3436;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            #high-score {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 18px;
+                color: white;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                z-index: 1;
+            }
+
+            #start-screen, #game-over {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 2rem;
+                border-radius: 10px;
+                color: white;
+                z-index: 2;
+            }
+
+            .btn {
+                background-color: #4EC0CA;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 18px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 10px;
+                transition: background-color 0.3s;
+            }
+
+            .btn:hover {
+                background-color: #3AA7B1;
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .input-group {
+                margin: 20px 0;
+            }
+
+            #player-name {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+                border: 2px solid #4EC0CA;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.9);
+                color: #333;
+                text-align: center;
+            }
+
+            #player-name:focus {
+                outline: none;
+                border-color: #3AA7B1;
+            }
+
+            .ad-container {
+                text-align: center;
+                margin: 20px auto;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            @media (max-width: 480px) {
+                .game-container {
+                    width: 320px;
+                    height: 568px;
+                }
+            }
+
+            .toast {
+                position: fixed;
+                left: 50%;
+                bottom: 40px;
+                transform: translateX(-50%);
+                min-width: 220px;
+                max-width: 90vw;
+                background: linear-gradient(90deg, #4EC0CA 60%, #3AA7B1 100%);
+                color: #fff;
+                padding: 16px 32px;
+                border-radius: 30px;
+                font-size: 1rem;
+                font-weight: 600;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+                z-index: 9999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s, bottom 0.4s;
+                text-align: center;
+                letter-spacing: 1px;
+            }
+            .toast.show {
+                opacity: 1;
+                pointer-events: auto;
+                bottom: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <a href="index.html" class="logo-link">
+                    <div class="logo">
+                        <img src="flappybird.png" alt="Flappy Bird Logo" class="nav-logo">
+                        <span>Flappy Bird</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Game</a></li>
+                    <li><a href="leaderboard.html">Leaderboard</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <div class="game-wrapper">
+                <div class="game-container">
+                    <canvas id="board"></canvas>
+                    <div id="start-screen">
+                        <h1>Flappy Bird</h1>
+                        <p>Click or press Space to start</p>
+                    </div>
+                    <div id="game-over" class="hidden">
+                        <h2>Game Over!</h2>
+                        <p>Your Score: <span class="final-score">0</span></p>
+                        <div class="input-group">
+                            <input type="text" id="player-name" placeholder="Enter your name" maxlength="20" />
+                        </div>
+                        <div class="input-group">
+                            <label for="player-country" style="display:block; color:#fff; font-weight:600; margin-bottom:6px; letter-spacing:1px; font-size:15px; text-align:left;"></label>
+                            <div style="width:100%;">
+                                <select id="player-country" class="styled-select">
+                                    <option value="">Select your country</option>
+                                    <option value="United States">United States</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="India">India</option>
+                                    <option value="China">China</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="Russia">Russia</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Spain">Spain</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="South Korea">South Korea</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="South Africa">South Africa</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="submitScore()">Submit Score</button>
+                        <button class="btn" onclick="resetGame()">Play Again</button>
+                    </div>
+                </div>
+            </div>
+            <div id="toast" class="toast hidden"></div>
+            <!-- Bottom ad -->
+            <div class="ad-container">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-3494326893444566"
+                    data-ad-slot="YOUR_AD_SLOT_ID"
+                    data-ad-format="horizontal"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2025 Flappy Bird. All rights reserved.</p>
+        </footer>
+    </body>
+</html>

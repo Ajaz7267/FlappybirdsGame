@@ -1,0 +1,206 @@
+/* Reset and base styles */
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #4EC0CA;
+}
+
+/* Navigation styles */
+.navbar {
+    background-color: #2D3436;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-link:hover .logo {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #4EC0CA;
+}
+
+.nav-links a.active {
+    color: #4EC0CA;
+}
+/* Main content */
+.game-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Account for header and footer */
+    padding: 1rem;
+    position: relative;
+}
+/* Game container */
+.game-container {
+    margin: auto;
+    width: 360px;
+    height: 640px;
+    background-color: #4EC0CA;
+}
+
+#board {
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+/* Score displays */
+#score-display, #high-score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+#high-score {
+    top: 50px;
+}
+
+/* Game screens */
+#start-screen{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+}
+#game-over {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    backdrop-filter: blur(13px) saturate(180%);
+    -webkit-backdrop-filter: blur(13px) saturate(180%);
+    background-color: rgba(19, 37, 71, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+    padding: 2rem;
+    border-radius: 10px;
+}
+.input-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#game-over h2{
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+#game-over p{
+    font-size: 14px;
+    margin: 10px 0;
+}
+.hidden {
+    display: none;
+}
+
+/* Buttons */
+.btn {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #056f6d;
+}
+
+/* Footer */
+footer {
+    background-color: #2D3436;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+.styled-select {
+    width: 100%;
+    padding: 10px 40px 10px 14px;
+    font-size: 16px;
+    border: 2px solid #4EC0CA;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.95) url('data:image/svg+xml;utf8,<svg fill="%234EC0CA" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>') no-repeat right 12px center/22px 22px;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 8px rgba(78,192,202,0.08);
+}
+.styled-select:focus {
+    outline: none;
+    border-color: #3AA7B1;
+    box-shadow: 0 0 0 2px #4EC0CA44;
+}
+.styled-select:hover {
+    border-color: #3AA7B1;
+}
+.styled-select option {
+    background: #fff;
+    color: #333;
+}
